@@ -9,6 +9,7 @@ import turns from './turns.route.js'
 import mails from './mails.route.js'
 import admin from './admin.route.js'
 import doctors from './doctors.route.js';
+import Doctors from '../models/doctors.model.js'
 
 
 
@@ -33,6 +34,16 @@ app.get('/de', (req, res)=>{
     const {pass} = req.body
     const result = decryptData(req.body.pass)
     res.status(200).json({status: 'Ok', message: result})
+})
+
+app.get('/dbtest', async (req,res)=>{
+    try{
+        let result = await Doctors.find({})
+        res.status(200).json({data: result})
+    }catch(e) {
+        res.status(200).json({msg: "ErrorDB", data: 'e'})
+    }
+    
 })
 
 export default app;

@@ -10,8 +10,7 @@ import { deleteAntiquesRecordsDBService } from "./services/turns.service.js";
 let {PORT} = process.env;
 let app = express();
 
-app.use(cors())
-// app.use(cors({origin: '*'}))
+app.use(cors({origin: '*'}))
 app.use(express.json());
 app.use('/', routes)
 

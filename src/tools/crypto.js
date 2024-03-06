@@ -10,6 +10,7 @@ function encryptData (data) {
 }
 
 function decryptData(data) {
+
     const decypherText=cryptojs.AES.decrypt(data, key).toString(cryptojs.enc.Utf8)
     return JSON.parse(decypherText);
 }

@@ -77,13 +77,19 @@ const existAdminService = async ()=>{
         active:true,
         admin:true,
     })
+    
     let adminRecord;
+
+    //si ya hay un administrador activo por 
     if (result.length>0) {
-                        if (result.length==2) adminRecord = result.filter(x=>x.email!='admin@gmail.com')[0]
-                        else adminRecord=result[0];
+                        if  (result.length==2) {
+                            adminRecord = result.filter(x=>x.email!='admin@gmail.com')[0]
+                        }else {
+                            adminRecord=result[0];
+                        }    
+
                         return {status:200,
                             password: adminRecord.password,
-                            email: adminRecord.email,
                             email: adminRecord.email,
                             name: adminRecord.name,
                             lastName: adminRecord.lastName,
@@ -92,40 +98,47 @@ const existAdminService = async ()=>{
                             active: adminRecord.active,
                             admin: adminRecord.admin
                         }  //existe una semilla en la db
-    }
-    let messageResponse;
-    if (result.length==0) {
-        const adminSeed = {
-            name: 'admin',
-            lastName: 'admin',
-            stringName: 'admin',
-            title: 'Dra.',
-            email: 'admin@gmail.com',
-            password: 'U2FsdGVkX18Di0ibeV+Lviuyk72IsjieKUa4o5I3RjxQk4DSIK3KIugXQmEM5svx', //'adminadminadmin',
-            active: true,
-            admin: true
-        }
-        await Doctors.create(adminSeed)
-        .then(resolve=>{
-            //la semilla admin fue creada
-            messageResponse = {status:201,
-                password: adminSeed.password,
-                email: adminSeed.email,
-                name: adminSeed.name,
-                lastName: adminSeed.lastName,
-                stringName: adminSeed.stringName,
-                title: adminSeed.title,
-                active: adminSeed.active,
-                admin: adminSeed.admin
+    }else {
+            // si no hay un administrador todavia, hay que crear el admin@gmail.com
+            let messageResponse;
+            
+            if (result.length==0) {
+                const adminSeed = {
+                    name: 'admin',
+                    lastName: 'admin',
+                    stringName: 'admin',
+                    title: 'Dra.',
+                    email: 'admin@gmail.com',
+                    password: encryptData('adminadminadmin'), //'adminadminadmin',
+                    active: true,
+                    admin: true
+                }
+                await Doctors.create(adminSeed)
+                .then(resolve=>{
+                    //la semilla admin fue creada
+                    messageResponse = {status:201,
+                        password: adminSeed.password,
+                        email: adminSeed.email,
+                        name: adminSeed.name,
+                        lastName: adminSeed.lastName,
+                        stringName: adminSeed.stringName,
+                        title: adminSeed.title,
+                        active: adminSeed.active,
+                        admin: adminSeed.admin
+                    }
+                })
+                .catch(error=>{
+                    // la semilla admin no existia y no pudo ser creada tiene que reintenar
+                    messageResponse = {status:500, password: '', email: ''}
+                })
             }
-        })
-        .catch(error=>{
-            // la semilla admin no existia y no pudo ser creada tiene que reintenar
-            messageResponse = {status:500, password: '', email: ''}
-        })
+            return messageResponse;
     }
-    return messageResponse;
+
+
 }
+
+
 
 //funcion para devolver la lista de doctores para el login de paciente para hace el select del medico
 const doctorsListService = async (status)=>{

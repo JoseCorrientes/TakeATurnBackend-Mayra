@@ -94,6 +94,7 @@ async function loginAdmin (req, res) {
 
 //funcion para recuperar todos los doctores listados, pasandoles si queremos activos o inactivos o todos.
 async function doctorsList (req, res){
+
     let active  = req.body.active
     let result = await doctorsListService(active);
     if (result.status==200) res.status(200).json({status: 200, data: result.data, message:''})

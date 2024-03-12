@@ -36,9 +36,9 @@ export async function sendEmailBrevo(data,sender, doctorData, typeOperation) {
     <hr>
     <p>Si por cualquier motivo no pudiera asistir le ruego cancele el turno a través de nuestra web: 
     <link
-        href="https://odontoturn.vercel.app"
+        href="https://takeaturnaresti.vercel.app/
     >
-    https://odontoturn.vercel.app
+    https://takeaturnaresti.vercel.app
     </link>
     </p>
     </body>
@@ -55,9 +55,9 @@ export async function sendEmailBrevo(data,sender, doctorData, typeOperation) {
     <hr>
     <p>Nuestra web: 
     <link
-        href="https://odontoturn.vercel.app"
+        href="https://takeaturnaresti.vercel.app/"
     >
-    https://odontoturn.vercel.app
+    https://takeaturnaresti.vercel.app
     </link>
     </p>
     </body>
@@ -121,9 +121,9 @@ export async function sendEmailBrevoMultiple(data,sender, doctorData, typeOperat
         <hr>
         <p>Nuestra web: 
         <link
-            href="https://odontoturn.vercel.app"
+            href="https://takeaturnaresti.vercel.app/"
         >
-        https://odontoturn.vercel.app
+        https://takeaturnaresti.vercel.app
         </link>
         </p>
         </body>

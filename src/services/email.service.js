@@ -36,7 +36,7 @@ export async function sendEmailBrevo(data,sender, doctorData, typeOperation) {
     <hr>
     <p>Si por cualquier motivo no pudiera asistir le ruego cancele el turno a través de nuestra web: 
     <link
-        href="https://takeaturnaresti.vercel.app/
+        href="https://takeaturnaresti.vercel.app/"
     >
     takeaturnaresti.vercel.app
     </link>
